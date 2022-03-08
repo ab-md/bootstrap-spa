@@ -2,7 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from "./components/Header";
 import HomePage from './components/HomePage'
 import Posts from './components/posts/Posts';
-import Users from './components/users/Users';
+import Albums from './components/albums/Albums';
+import SinglePost from './components/posts/SinglePost';
+import Photos from './components/albums/Photos';
 
 function App() {
   return (
@@ -11,8 +13,10 @@ function App() {
 
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/posts/:id' element={<SinglePost />} />
         <Route path='/posts' element={<Posts />} />
-        <Route path='/users' element={<Users />} />
+        <Route path='/albums/:id' element={<Photos />} />
+        <Route path='/albums' element={<Albums />} />
       </Routes>
     </BrowserRouter>
   );
