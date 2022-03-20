@@ -8,4 +8,8 @@
         flex-wrap: wrap;
         justify-content: center;
     }
+
+    .alert_w {
+        width: 669px;
+    }
 }

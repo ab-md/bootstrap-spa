@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import { Alert, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import postsAction from '../../redux/posts/action';
 import PostCard from './PostCard';
+import styles from '../../style/global.module.css';
 
 const Posts = () => {
 
@@ -13,15 +15,22 @@ const Posts = () => {
     }, [dispatch])
 
     return (
-        <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center"}}>
+        <div className='text-center'>
             {
                 posts.loading ?
-                    <p>Loading</p> :
+                    <Spinner animation='border' variant='warning' className='mt-5' /> :
                     posts.error ?
-                        <p>Error</p> :
-                        posts.postsData.map(post => (
-                            <PostCard key={post.id} post={post} />
-                        ))
+                        <Alert variant='danger' className='m-5 text-center text-dark' style={{ maxWidth: '669px !important' }}>Something went wrong!
+                            <br />
+                            Please try again.
+                        </Alert> :
+                        <div className={styles.justify}>
+                            {
+                                posts.postsData.map(post => (
+                                    <PostCard key={post.id} post={post} />
+                                ))
+                            }
+                        </div>
             }
         </div>
     );

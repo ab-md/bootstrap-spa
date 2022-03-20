@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Alert, Card } from "react-bootstrap";
+import { Alert, Card, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import commentsAction from "../../redux/comments/action";
@@ -27,9 +27,14 @@ const SinglePost = () => {
         <div>
             {
                 post.loading ?
-                    <p>Loading ...</p> :
+                    <div className="text-center">
+                        <Spinner animation='border' variant='warning' className='mt-5' />
+                    </div> :
                     post.error ?
-                        <p>Error!</p> :
+                        <Alert variant='danger' className='m-5 text-center text-dark' style={{ maxWidth: '669px !important' }}>Something went wrong!
+                            <br />
+                            Please try again.
+                        </Alert> :
                         <>
                             <div style={{ height: "450px" }}>
                                 <Card

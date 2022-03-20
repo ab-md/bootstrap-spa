@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Alert, Button, Card, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import albumsAction from '../../redux/albums/action';
@@ -15,12 +15,15 @@ const Albums = () => {
     }, [dispatch])
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} text-center`}>
             {
                 albums.loading ?
-                    <p>Loading ...</p> :
+                    <Spinner animation='border' variant='success' className='mt-5' /> :
                     albums.error ?
-                        <p>Error!</p> :
+                        <Alert variant='danger' className={`m-5 ${styles.alert_w}`}>Something went wrong!
+                            <br />
+                            Please try again.
+                        </Alert> :
                         albums.albumsData.map(album => (
                             <Card key={album.id} bg="secondary" className={'m-5 ' + styles.album}>
                                 <Card.Body className='text-center text-light'>{album.title}</Card.Body>
